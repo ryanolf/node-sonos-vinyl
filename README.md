@@ -117,14 +117,64 @@ You can monitor the process output to see what's going on. If you're using pm2, 
 $ pm2 log
 ```
 
+# Configuration
+
+Various settings can be configured in the `usersettings.json` file, which you can find in the root of the project.
+
+```json
+{
+  "sonos_http_api": "http://localhost:5005",
+  "sonos_room": "Living Room",
+  "log_level": "info",
+  "reset_playback_options_on_queue": true
+}
+```
+
+**Sonos HTTP API endpoint**
+
+- Type: `String`
+- Default: `http://localhost:5005`
+
+The URL of your [node-sonos-http-api](http://jishi.github.io/node-sonos-http-api/) instance or another service which is compatible. You can leave this setting as is unless you already have your own instance running.
+
+**Sonos room**
+
+- Type: `String`
+- Default: `Living Room`
+
+The room which will receive any playback commands. You can program an NFC tag to change rooms as per the instructions at [Sonos Vinyl Emulator](https://github.com/hankhank10/vinylemulator#usage).
+
+**Log level**
+
+- Type: `String`
+- Default: `info`
+
+Verbosity of the logger. Valid options are:
+
+- `info`: Displays all messages from all loggers.
+- `warn`: Displays messages only from the warn, error & fatal loggers.
+- `error`: Displays messages only from the error & fatal loggers.
+- `off`: Disables logging entirely.
+
+**Reset playback options on queue**
+
+- Type: `Boolean`
+- Default: `true`
+
+When set to `true`, application turns off shuffle, repeat, and crossfade whenever new music is queued.
+
 # Programming cards
 
 ## Card record format
 
-The cards are programmed per the instructions at [Sonos Vinyl Emulator](https://github.com/hankhank10/vinylemulator). One minor difference with this program compared to Vinyl Emulator is that this program turns off shuffle, repeat, and crossfade whenever new music is queued. This should perhaps be configurable in `usersettings.json`, but it's not yet. You can enable cross fade, shuffle, or repeat on a card-by-card basis by adding records to enable these features to the card.
+The cards are programmed per the instructions at [Sonos Vinyl Emulator](https://github.com/hankhank10/vinylemulator). One minor difference with this program compared to Vinyl Emulator is that this program turns off shuffle, repeat, and crossfade whenever new music is queued. This is configurable in `usersettings.json`, see the [Configuration section](#configuration) for more info. You can also enable cross fade, shuffle, or repeat on a card-by-card basis by adding records to enable these features to the card.
 
 ## Writing cards
 
 You can probably use the card reader/writer you plan to use to write the cards using software like [NFC Tools](https://www.wakdev.com/en/apps/nfc-tools-pc-mac.html) on your Mac or PC. I like to use my iPhone. Most modern smartphones can read and write NFC with the right app.
 
 It's important that before you write, the card is properly erased and formatted. On my iPhone, I format the cards for NDEF using "NXP Tagwriter." Once the cards are formatted, I use NFC Tools on iOS to write the record(s).
+
+```
+
+```
